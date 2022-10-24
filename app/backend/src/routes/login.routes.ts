@@ -6,8 +6,8 @@ import loginMiddleware from '../middlewares/login.middleware';
 
 const router = Router();
 
-const controller = new AuthenticationController();
+// const controller = new AuthenticationController();
 
-router.post('/', loginMiddleware, controller.login);
+router.post('/', loginMiddleware, AuthenticationController.login);
 
 export default router;

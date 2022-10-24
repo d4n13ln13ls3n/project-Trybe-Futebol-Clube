@@ -1,5 +1,7 @@
 import * as express from 'express';
+import joiErrorHandlerMiddleware from './middlewares/joi-error-handler.middleware';
 import LoginRouter from './routes/login.routes';
+import UserRouter from './routes/user.routes';
 
 class App {
   public app: express.Express;
@@ -25,6 +27,8 @@ class App {
     this.app.use(accessControl);
 
     this.app.use('/login', LoginRouter);
+    this.app.use('/users', UserRouter);
+    this.app.use(joiErrorHandlerMiddleware);
   }
 
   public start(PORT: string | number):void {

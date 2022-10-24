@@ -1,7 +1,7 @@
 // import { Request } from 'express';
 
 export interface AuthenticationCredentials {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -15,8 +15,8 @@ export interface CreateUserRequestBody {
 export interface User {
   id: number;
   username: string;
-  classe: string;
-  level: number;
+  role: string;
+  email: string;
   password: string;
 }
 
