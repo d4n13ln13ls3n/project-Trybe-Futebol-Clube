@@ -1,10 +1,10 @@
 import { ErrorRequestHandler } from 'express';
 import { ValidationError } from 'joi';
+import { AppError, AppErrorTypes } from '../errors/AppError';
+import HttpError from '../errors/httpErrors/HttpError';
 
 const httpStatusByJoiErrorType: Record<string, number> = {
-  // 'number.min': 422,
   'string.min': 422,
-  'unauthorized': 401,
 };
 
 const getErrorResponse = (joiError: ValidationError) => {
@@ -20,15 +20,24 @@ const getErrorResponse = (joiError: ValidationError) => {
   };
 };
 
-// module.exports = (err, req, res, next): RequestHandler => {
-const joiErrorHandlerMiddleware: ErrorRequestHandler = async (err, req, res, next) => {
-  if (!err.isJoi) {
-    return next(err);
+const joiErrorHandlerMiddleware: ErrorRequestHandler = async (
+  err: AppError | ValidationError,
+  req,
+  res,
+  _next,
+) => {
+  if ('type' in err && err.type === AppErrorTypes.HTTP) {
+    const { status, message } = err as HttpError;
+    return res.status(status).send({ message });
   }
 
-  const { message, status } = getErrorResponse(err);
+  if ('isJoi' in err && err.isJoi) {
+    const joiError = err as ValidationError;
+    const { message, status } = getErrorResponse(joiError);
+    return res.status(status).send({ message });
+  }
 
-  return res.status(status).json({ message });
+  return res.status(500).send({ message: err.message });
 };
 
 export default joiErrorHandlerMiddleware;

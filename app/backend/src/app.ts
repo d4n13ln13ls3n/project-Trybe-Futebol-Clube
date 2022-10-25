@@ -1,4 +1,5 @@
 import * as express from 'express';
+import 'express-async-errors';
 import joiErrorHandlerMiddleware from './middlewares/joi-error-handler.middleware';
 import LoginRouter from './routes/login.routes';
 import UserRouter from './routes/user.routes';

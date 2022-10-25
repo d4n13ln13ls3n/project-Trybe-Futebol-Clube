@@ -1,4 +1,5 @@
 import * as jwt from 'jsonwebtoken';
+// import BadRequestHttpError from '../errors/httpErrors/BadRequest';
 import env from '../config/env';
 
 import UnauthorizedHttpError from '../errors/httpErrors/UnauthorizedHttpError';
@@ -56,4 +57,12 @@ export default class LoginService {
       throw new UnauthorizedHttpError('INVALID_FIELDS');
     }
   }
+
+  // static loginValidation(authorization) {
+  //   if (!authorization) {
+  //     throw new BadRequestHttpError('Token not found');
+  //   }
+  //   const payload = TokenAuth.decrypt(authorization);
+  //   return payload;
+  // }
 }
