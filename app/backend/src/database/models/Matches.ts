@@ -8,6 +8,7 @@ class Matches extends Model {
   declare homeTeamGoals: number;
   declare awayTeam: number;
   declare awayTeamGoals: number;
+  declare inProgress: number;
 }
 
 Matches.init({
@@ -37,6 +38,11 @@ Matches.init({
     type: DataTypes.INTEGER,
     field: 'away_team_goals',
   },
+  inProgress: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'in_progress',
+  },
 }, {
   underscored: true,
   sequelize: db,
@@ -44,7 +50,7 @@ Matches.init({
   timestamps: false,
 });
 
-Matches.belongsTo(Teams, { foreignKey: 'homeTeam', as: 'homeTeam' });
-Matches.belongsTo(Teams, { foreignKey: 'awayTeam', as: 'awayTeam' });
+Matches.belongsTo(Teams, { foreignKey: 'homeTeam', as: 'teamHome' }); // included 'Alias' 26/10 15h49
+Matches.belongsTo(Teams, { foreignKey: 'awayTeam', as: 'teamAway' });
 
 export default Matches;

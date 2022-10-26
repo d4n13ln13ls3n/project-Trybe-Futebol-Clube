@@ -4,6 +4,7 @@ import joiErrorHandlerMiddleware from './middlewares/joi-error-handler.middlewar
 import LoginRouter from './routes/login.routes';
 import UserRouter from './routes/user.routes';
 import TeamRouter from './routes/team.routes';
+import MatchRouter from './routes/match.routes';
 
 class App {
   public app: express.Express;
@@ -31,6 +32,7 @@ class App {
     this.app.use('/login', LoginRouter);
     this.app.use('/users', UserRouter);
     this.app.use('/teams', TeamRouter);
+    this.app.use('/matches', MatchRouter);
     this.app.use(joiErrorHandlerMiddleware);
   }
 
