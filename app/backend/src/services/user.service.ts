@@ -14,5 +14,3 @@ export default class UserService {
     return user;
   }
 }
-
-// ASK LUIZ

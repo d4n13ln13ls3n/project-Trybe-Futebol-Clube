@@ -42,16 +42,12 @@ export default class LoginService {
   }
 
   static validateAccessToken(token: string) {
-    // const token = req.header('Authorization');
-    // const token = this.createAccessToken(user);
-
     if (!token) {
       throw new UnauthorizedHttpError('INVALID_FIELDS');
     }
 
     try {
       const decoded = jwt.verify(token, env.jwtSecret);
-      // console.log('decoded token:', decoded);
       return decoded as JWTPayload;
     } catch (err) {
       throw new UnauthorizedHttpError('INVALID_FIELDS');

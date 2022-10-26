@@ -3,6 +3,7 @@ import 'express-async-errors';
 import joiErrorHandlerMiddleware from './middlewares/joi-error-handler.middleware';
 import LoginRouter from './routes/login.routes';
 import UserRouter from './routes/user.routes';
+import TeamRouter from './routes/team.routes';
 
 class App {
   public app: express.Express;
@@ -29,6 +30,7 @@ class App {
 
     this.app.use('/login', LoginRouter);
     this.app.use('/users', UserRouter);
+    this.app.use('/teams', TeamRouter);
     this.app.use(joiErrorHandlerMiddleware);
   }
 

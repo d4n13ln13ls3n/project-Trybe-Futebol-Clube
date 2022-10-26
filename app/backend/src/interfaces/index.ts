@@ -20,48 +20,13 @@ export interface User {
   password: string;
 }
 
-export interface CreateProductRequestBody {
-  name: string;
-  amount: string; // NUMBER?
-}
-
-export interface ProductReturned {
+export interface Team {
   id: number;
-  name: string;
-  amount: string;
+  teamName: string;
 }
 
-export interface ProductRequestBodyWithOrderId {
-  name: string;
-  amount: string;
-  orderId: number;
-}
-
-export interface Product {
-  id: number;
-  name: string;
-  amount: string;
-  orderId: number;
-}
-
-export interface OrderForRequests {
-  id: number;
-  userId: number;
-}
-
-export interface OrderDTO {
-  id: number;
-  userId: number;
-  productsIds: number[];
-}
-
-export interface NewOrderPayload {
-  productsIds: number[];
-  userId: number;
-}
-
-export interface NewOrderRequestBody {
-  productsIds: number[];
+export interface TeamPayload {
+  teamName: string;
 }
 
 export interface JWTPayload {
