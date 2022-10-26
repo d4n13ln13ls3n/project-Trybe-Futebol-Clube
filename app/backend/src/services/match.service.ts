@@ -10,12 +10,10 @@ export default class MatchService {
         { model: Teams,
           as: 'teamHome',
           attributes: { exclude: ['id'] },
-          // through: { attributes: ['aaa'] },
         },
         { model: Teams,
           as: 'teamAway',
           attributes: { exclude: ['id'] },
-          // through: { attributes: ['bbb'] },
         },
       ],
     });

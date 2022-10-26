@@ -10,18 +10,20 @@ export default class UserController {
   }
 
   async getMatches(req: Request, res: Response): Promise<Response> {
-    const { q } = req.query;
+    const { inProgress } = req.query;
+    console.log('q:', inProgress);
     const allMatches = await this.matchService.getMatches();
-    console.log('matches inside controller:', allMatches);
+    // console.log('matches inside controller:', allMatches);
     if (!allMatches) {
       throw new Error('Something went wrong');
     }
-    if (!q) {
-      return res.status(200).json(allMatches);
+    if (!inProgress) {
+      return res.status(200).json(allMatches); // req 19
     }
 
-    const filteredMatches = q === 'false' ? allMatches.filter((match) => match.inProgress === 0)
-      : allMatches.filter((match) => match.inProgress === 1);
+    const filteredMatches = inProgress === 'false'
+      ? allMatches.filter((match) => match.inProgress === 0) // req 21
+      : allMatches.filter((match) => match.inProgress === 1); // req 20
 
     return res.status(200).json(filteredMatches);
   }
