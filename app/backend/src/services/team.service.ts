@@ -8,4 +8,10 @@ export default class TeamService {
     console.log('teams inside service:', teams);
     return teams;
   }
+
+  async getTeam(id: number): Promise<Team> {
+    const team = await TeamModel.findByPk(id);
+    console.log('team inside service:', team);
+    return team as Team;
+  }
 }
