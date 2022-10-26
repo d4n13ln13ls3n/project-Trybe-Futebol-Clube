@@ -10,12 +10,20 @@ export default class UserController {
   }
 
   async getMatches(req: Request, res: Response): Promise<Response> {
-    const matches = await this.matchService.getMatches();
-    console.log('matches inside controller:', matches);
-    if (!matches) {
-      return res.status(500).json({ error: 'Something went wrong' });
+    const { q } = req.query;
+    const allMatches = await this.matchService.getMatches();
+    console.log('matches inside controller:', allMatches);
+    if (!allMatches) {
+      throw new Error('Something went wrong');
     }
-    return res.status(200).json(matches);
+    if (!q) {
+      return res.status(200).json(allMatches);
+    }
+
+    const filteredMatches = q === 'false' ? allMatches.filter((match) => match.inProgress === 0)
+      : allMatches.filter((match) => match.inProgress === 1);
+
+    return res.status(200).json(filteredMatches);
   }
 
   async getMatch(req: Request, res: Response): Promise<Response | NotFoundHttpError> {
