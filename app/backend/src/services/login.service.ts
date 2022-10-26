@@ -1,5 +1,5 @@
 import * as jwt from 'jsonwebtoken';
-// import BadRequestHttpError from '../errors/httpErrors/BadRequest';
+import BadRequestHttpError from '../errors/httpErrors/BadRequest';
 import env from '../config/env';
 
 import UnauthorizedHttpError from '../errors/httpErrors/UnauthorizedHttpError';
@@ -58,11 +58,11 @@ export default class LoginService {
     }
   }
 
-  // static loginValidation(authorization) {
-  //   if (!authorization) {
-  //     throw new BadRequestHttpError('Token not found');
-  //   }
-  //   const payload = TokenAuth.decrypt(authorization);
-  //   return payload;
-  // }
+  static loginValidation(authorization: string) {
+    if (!authorization) {
+      throw new BadRequestHttpError('Token not found');
+    }
+    const payload = TokenAuth.decrypt(authorization);
+    return payload;
+  }
 }
