@@ -38,4 +38,10 @@ export default class UserController {
     }
     return res.status(200).json(match);
   }
+
+  // async saveMatch(req: Request, res: Response): Promise<Response> {
+  //   const { newMatch } = req.body;
+  //   const matchToSave = await this.matchService.saveMatch(newMatch);
+  //   return res.status(201).json(matchToSave);
+  // }
 }

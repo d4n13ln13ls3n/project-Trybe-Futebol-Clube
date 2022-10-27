@@ -7,5 +7,6 @@ const router = Router();
 router
   .get('/:id', (req, res) => matchController.getMatch(req, res))
   .get('/', (req, res) => matchController.getMatches(req, res));
+// .post('/', (req, res) => matchController.saveMatch(req, res));
 
 export default router;

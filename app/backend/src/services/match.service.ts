@@ -25,4 +25,23 @@ export default class MatchService {
     console.log('match inside service:', match);
     return match as Match;
   }
+
+  // async filterMatchesByQuery(query: string): Promise<Match> {
+  //   const allMatches = await MatchModel.findAll();
+  //   const filteredMatches = query === 'inProgress?=false'
+  //     ? allMatches.filter((match) => match.inProgress === 0) // req 21
+  //     : allMatches.filter((match) => match.inProgress === 1); // req 20
+  //     return filteredMatches;
+  // }
+
+  // interface Filter {
+  //   inProgress: boolean;
+  // }
+  // async find(filter?: Filter): Promise<Match> {
+  //     const allMatches = await MatchModel.findAll();
+  //     if(filter) {
+  //        return allMatches.filter((match) => match.inProgress === filter.inProgress));
+  //     }
+  //     return allMatches;
+  //   }
 }
