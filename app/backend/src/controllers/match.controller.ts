@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import NotFoundHttpError from '../errors/httpErrors/NotFound';
 import MatchService from '../services/match.service';
+import TeamModel from '../database/models/Teams';
+import UnprocessableEntity from '../errors/httpErrors/UnprocessableEntity';
 
 export default class UserController {
   private matchService: MatchService;
@@ -45,11 +47,20 @@ export default class UserController {
     const newMatch = req.body;
     console.log('newMatch:', newMatch);
     console.log('new match inside controller:', newMatch);
-    if (newMatch.homeTeam === newMatch.awayTeam) {
-      return res.status(422).json({
-        message: 'It is not possible to create a match with two equal teams',
-      });
+
+    // const bothTeams = ['homeTeam', 'awayTeam'];
+    const doesHomeTeamExist = await TeamModel.findByPk(newMatch.homeTeam);
+    const doesAwayTeamExist = await TeamModel.findByPk(newMatch.awayTeam);
+    // const existingTeam = bothTeams.some((team) => await TeamModel.findByPk(newMatch.team));
+
+    if (!doesAwayTeamExist || !doesHomeTeamExist) {
+      throw new NotFoundHttpError('There is no team with such id!');
     }
+
+    if (newMatch.homeTeam === newMatch.awayTeam) {
+      throw new UnprocessableEntity('It is not possible to create a match with two equal teams');
+    }
+
     const matchToSave = await this.matchService.saveMatchAsInProgress(newMatch);
     console.log('match to save:', matchToSave);
     return res.status(201).json(matchToSave);
