@@ -43,8 +43,13 @@ export default class UserController {
 
   async saveMatchAsInProgress(req: Request, res: Response): Promise<Response> {
     const newMatch = req.body;
-    console.log('req.body:', req.body);
-    // console.log('new match inside controller:', newMatch);
+    console.log('newMatch:', newMatch);
+    console.log('new match inside controller:', newMatch);
+    if (newMatch.homeTeam === newMatch.awayTeam) {
+      return res.status(422).json({
+        message: 'It is not possible to create a match with two equal teams',
+      });
+    }
     const matchToSave = await this.matchService.saveMatchAsInProgress(newMatch);
     console.log('match to save:', matchToSave);
     return res.status(201).json(matchToSave);

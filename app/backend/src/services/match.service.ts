@@ -29,7 +29,7 @@ export default class MatchService {
   async saveMatchAsInProgress(match: MatchPayload): Promise<MatchPayload> {
     console.log('entered service');
     const newMatch = await MatchModel.create({ ...match, inProgress: true }, { raw: true });
-    console.log('new match inside service:', newMatch);
+    // console.log('new match inside service:', newMatch.homeTeam, newMatch.awayTeam);
     return newMatch;
   }
 
