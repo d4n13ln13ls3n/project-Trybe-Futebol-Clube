@@ -49,4 +49,10 @@ export default class UserController {
     console.log('match to save:', matchToSave);
     return res.status(201).json(matchToSave);
   }
+
+  async saveMatchAsFinished(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+    await this.matchService.patchMatch(Number(id));
+    return res.status(200).json({ message: 'Finished' });
+  }
 }

@@ -33,6 +33,15 @@ export default class MatchService {
     return newMatch;
   }
 
+  async patchMatch(id: number): Promise<void> {
+    await MatchModel.update(
+      { inProgress: false },
+      { where: { id },
+        // returning: true,
+      },
+    );
+  }
+
   // async filterMatchesByQuery(query: string): Promise<Match> {
   //   const allMatches = await MatchModel.findAll();
   //   const filteredMatches = query === 'inProgress?=false'
