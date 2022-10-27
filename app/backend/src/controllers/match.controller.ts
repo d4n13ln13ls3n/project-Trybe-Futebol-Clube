@@ -11,6 +11,8 @@ export default class UserController {
 
   async getMatches(req: Request, res: Response): Promise<Response> {
     const { inProgress } = req.query;
+    // const filter = inProgress !== undefined ? { inProgress } : undefined;
+    // const matches = await this.matchService.find(filter);
     console.log('q:', inProgress);
     const allMatches = await this.matchService.getMatches();
     // console.log('matches inside controller:', allMatches);
@@ -22,8 +24,8 @@ export default class UserController {
     }
 
     const filteredMatches = inProgress === 'false'
-      ? allMatches.filter((match) => match.inProgress === 0) // req 21
-      : allMatches.filter((match) => match.inProgress === 1); // req 20
+      ? allMatches.filter((match) => match.inProgress === false) // req 21
+      : allMatches.filter((match) => match.inProgress === true); // req 20
 
     return res.status(200).json(filteredMatches);
   }
@@ -39,9 +41,12 @@ export default class UserController {
     return res.status(200).json(match);
   }
 
-  // async saveMatch(req: Request, res: Response): Promise<Response> {
-  //   const { newMatch } = req.body;
-  //   const matchToSave = await this.matchService.saveMatch(newMatch);
-  //   return res.status(201).json(matchToSave);
-  // }
+  async saveMatchAsInProgress(req: Request, res: Response): Promise<Response> {
+    const newMatch = req.body;
+    console.log('req.body:', req.body);
+    // console.log('new match inside controller:', newMatch);
+    const matchToSave = await this.matchService.saveMatchAsInProgress(newMatch);
+    console.log('match to save:', matchToSave);
+    return res.status(201).json(matchToSave);
+  }
 }

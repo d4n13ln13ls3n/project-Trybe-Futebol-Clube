@@ -1,5 +1,5 @@
 /* eslint-disable class-methods-use-this */
-import { Match } from '../interfaces';
+import { Match, MatchPayload } from '../interfaces';
 import MatchModel from '../database/models/Matches';
 import Teams from '../database/models/Teams';
 
@@ -26,6 +26,13 @@ export default class MatchService {
     return match as Match;
   }
 
+  async saveMatchAsInProgress(match: MatchPayload): Promise<MatchPayload> {
+    console.log('entered service');
+    const newMatch = await MatchModel.create({ ...match, inProgress: true }, { raw: true });
+    console.log('new match inside service:', newMatch);
+    return newMatch;
+  }
+
   // async filterMatchesByQuery(query: string): Promise<Match> {
   //   const allMatches = await MatchModel.findAll();
   //   const filteredMatches = query === 'inProgress?=false'
@@ -34,14 +41,13 @@ export default class MatchService {
   //     return filteredMatches;
   // }
 
-  // interface Filter {
-  //   inProgress: boolean;
-  // }
   // async find(filter?: Filter): Promise<Match> {
-  //     const allMatches = await MatchModel.findAll();
-  //     if(filter) {
-  //        return allMatches.filter((match) => match.inProgress === filter.inProgress));
-  //     }
-  //     return allMatches;
+  //   const allMatches = await MatchModel.findAll();
+
+  //   if(filter) {
+  //      return allMatches.filter((match) => match.inProgress === filter.inProgress));
   //   }
+
+  //   return allMatches;
+  // }
 }
