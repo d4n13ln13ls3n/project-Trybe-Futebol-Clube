@@ -81,3 +81,8 @@ export interface Leaderboard {
   goalsBalance: number;
   efficiency: number;
 }
+
+export interface ScorePayload {
+  homeTeamGoals: number;
+  awayTeamGoals: number;
+}

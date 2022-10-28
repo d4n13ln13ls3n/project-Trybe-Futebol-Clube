@@ -61,8 +61,9 @@ export default class UserController {
       throw new UnprocessableEntity('It is not possible to create a match with two equal teams');
     }
 
+    delete newMatch.user;
     const matchToSave = await this.matchService.saveMatchAsInProgress(newMatch);
-    console.log('match to save:', matchToSave);
+    // console.log('match to save:', matchToSave);
     return res.status(201).json(matchToSave);
   }
 
@@ -70,5 +71,12 @@ export default class UserController {
     const { id } = req.params;
     await this.matchService.patchMatch(Number(id));
     return res.status(200).json({ message: 'Finished' });
+  }
+
+  async saveScoreInProgressMatch(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+    await this.matchService.saveScoreInProgressMatch(Number(id), homeTeamGoals, awayTeamGoals);
+    return res.status(200).json({ message: 'Updated score' });
   }
 }

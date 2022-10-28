@@ -43,14 +43,14 @@ export default class LoginService {
 
   static validateAccessToken(token: string) {
     if (!token) {
-      throw new UnauthorizedHttpError('INVALID_FIELDS');
+      throw new UnauthorizedHttpError('Token must be a valid token');
     }
 
     try {
       const decoded = jwt.verify(token, env.jwtSecret);
       return decoded as JWTPayload;
     } catch (err) {
-      throw new UnauthorizedHttpError('INVALID_FIELDS');
+      throw new UnauthorizedHttpError('Token must be a valid token');
     }
   }
 
