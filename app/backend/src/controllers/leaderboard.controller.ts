@@ -18,14 +18,12 @@ export default class UserController {
   }
 
   async getAwayLeaderboard(req: Request, res: Response): Promise<Response> {
-    const { matches, teams } = req.body;
-    const awayLeaderboard = await this.leaderboardService.getAwayLeaderboard(matches, teams);
+    const awayLeaderboard = await this.leaderboardService.getAwayLeaderboard();
     return res.status(200).json(awayLeaderboard);
   }
 
   async getGeneralLeaderboard(req: Request, res: Response): Promise<Response> {
-    const { matches, teams } = req.body;
-    const generalLeaderboard = await this.leaderboardService.getGeneralLeaderboard(matches, teams);
+    const generalLeaderboard = await this.leaderboardService.getGeneralLeaderboard();
     return res.status(200).json(generalLeaderboard);
   }
 }

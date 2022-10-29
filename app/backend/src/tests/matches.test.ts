@@ -26,7 +26,7 @@ describe.only('Testing the matches route', () => {
       "homeTeamGoals": 1,
       "awayTeam": 8,
       "awayTeamGoals": 1,
-      "inProgress": 0,
+      "inProgress": false,
     },
     {
       "id": 3,
@@ -34,7 +34,7 @@ describe.only('Testing the matches route', () => {
       "homeTeamGoals": 3,
       "awayTeam": 11,
       "awayTeamGoals": 0,
-      "inProgress": 1,
+      "inProgress": true,
     }];
 
   it('Successful get request to /matches returns status code 200 and an array of matches', async () => {
@@ -45,7 +45,7 @@ describe.only('Testing the matches route', () => {
   });
 
   it('Successful get request to /matches?inProgress=true returns status code 200 and lists the matches in progress', async () => {
-    const mockedInProgressMatches = mockedMatches.filter((match) => match.inProgress === 1);
+    const mockedInProgressMatches = mockedMatches.filter((match) => match.inProgress === true);
     const findAllStub = sinon.stub(MatchModel, 'findAll').resolves(mockedMatches as MatchModel[]);
     
     const httpResponse = await chai.request(app).get('/matches?inProgress=true');
@@ -55,7 +55,7 @@ describe.only('Testing the matches route', () => {
   });
 
   it('Successful get request to /matches?inProgress=false returns status code 200 and lists the finished matches', async () => {
-    const mockedFinishedMatches = mockedMatches.filter((match) => match.inProgress === 0);
+    const mockedFinishedMatches = mockedMatches.filter((match) => match.inProgress === false);
     const findAllStub = sinon.stub(MatchModel, 'findAll').resolves(mockedMatches as MatchModel[]);
     
     const httpResponse = await chai.request(app).get('/matches?inProgress=false');
