@@ -62,7 +62,7 @@ function getGoalsSurplusHome(teamId: number, matches: Match[]) {
 function getEfficiencyHome(teamId: number, matches: Match[]) {
   const totalPoints = getTotalPointsHome(teamId, matches);
   const totalGames = getTotalGamesHome(teamId, matches);
-  const efficiency = (totalPoints / (totalGames * 3)) * 100;
+  const efficiency = Number(((totalPoints / (totalGames * 3)) * 100).toFixed(2));
 
   return efficiency;
 }

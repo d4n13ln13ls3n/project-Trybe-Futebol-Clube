@@ -5,7 +5,7 @@ import LeaderboardService from '../services/leaderboard.service';
 // import MatchModel from '../database/models/Matches';
 // import UnprocessableEntity from '../errors/httpErrors/UnprocessableEntity';
 
-export default class UserController {
+export default class LeaderboardController {
   private leaderboardService: LeaderboardService;
 
   constructor() {

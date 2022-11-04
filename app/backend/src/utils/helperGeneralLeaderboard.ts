@@ -66,7 +66,7 @@ function getGoalsSurplus(teamId: number, matches: Match[]) {
 function getEfficiency(teamId: number, matches: Match[]) {
   const totalPoints = getTotalPoints(teamId, matches);
   const totalGames = getTotalGames(teamId, matches);
-  const efficiency = (totalPoints / (totalGames * 3)) * 100;
+  const efficiency = Number(((totalPoints / (totalGames * 3)) * 100).toFixed(2));
 
   return efficiency;
 }
@@ -83,8 +83,6 @@ function sortLeaderboard(leaderboard: Leaderboard[]) {
   });
   return sortLeaderBoard;
 }
-
-// fazer função pra listar hometeams and awayteams
 
 export function getHomeTeamsIds(matches: Match[]): number[] {
   const homeTeamsIds = matches.map((match) => match.homeTeam);

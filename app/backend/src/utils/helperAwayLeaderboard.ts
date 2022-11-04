@@ -62,7 +62,7 @@ function getGoalsSurplusAway(teamId: number, matches: Match[]) {
 function getEfficiencyAway(teamId: number, matches: Match[]) {
   const totalPoints = getTotalPointsAway(teamId, matches);
   const totalGames = getTotalGamesAway(teamId, matches);
-  const efficiency = (totalPoints / (totalGames * 3)) * 100;
+  const efficiency = Number(((totalPoints / (totalGames * 3)) * 100).toFixed(2));
 
   return efficiency;
 }

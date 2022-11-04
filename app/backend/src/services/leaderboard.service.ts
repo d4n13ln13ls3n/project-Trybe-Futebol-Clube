@@ -64,10 +64,3 @@ export default class MatchService {
     return generalLeaderboard;
   }
 }
-
-// const homeTeamsIds = getHomeTeamsIds(matches);
-// const homeTeamsNames = await homeTeamsIds.map((homeTeamsId) => Teams.findByPk(homeTeamsId));
-// const objectIds = homeTeamsIds.forEach((homeTeamsId) => [{ id: homeTeamsId }]);
-// const objectNames = homeTeamsNames.forEach((homeTeamsName) => [{ teamName: homeTeamsName }]);
-// const homeLeaderboard = await getTeamData(homeTeams, matches);
-// return homeLeaderboard;
