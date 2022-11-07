@@ -14,7 +14,7 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe.only('Testing the matches route', () => {
+describe('Testing the matches route', () => {
   afterEach(
     sinon.restore
   );
@@ -72,5 +72,23 @@ describe.only('Testing the matches route', () => {
     expect(httpResponse.status).to.equal(404);
     expect(httpResponse.body).to.deep.equal({ message: 'Match does not exist' });
   });
+
+  it('Successful get request to /matches/:id returns status code 200', async () => {
+    sinon.stub(MatchModel, 'findByPk').resolves(mockedMatches[0] as MatchModel);
+
+    const httpResponse = await chai.request(app).get('/matches/1');
+    
+    expect(httpResponse.status).to.equal(200);
+    expect(httpResponse.body).to.deep.equal(mockedMatches[0]);
+  });
+
+  // it.only('Function "getMatches" does not return the expected result and returns an error message', async () => {
+  //   sinon.stub(MatchModel, 'findAll').resolves(null);
+
+  //   const httpResponse = await chai.request(app).get('/matches/33');
+    
+  //   expect(httpResponse.status).to.equal(500);
+  //   expect(httpResponse.body).to.deep.equal({ message: 'Something went wrong' });
+  // });
 
 });

@@ -17,17 +17,13 @@ export default class UserController {
     // const matches = await this.matchService.find(filter);
     console.log('q:', inProgress);
     const allMatches = await this.matchService.getMatches();
-    // console.log('matches inside controller:', allMatches);
-    if (!allMatches) {
-      throw new Error('Something went wrong');
-    }
     if (!inProgress) {
       return res.status(200).json(allMatches); // req 19
     }
 
     const filteredMatches = inProgress === 'false'
-      ? allMatches.filter((match) => match.inProgress === false) // req 21
-      : allMatches.filter((match) => match.inProgress === true); // req 20
+      ? allMatches.filter((match) => match.inProgress === false)
+      : allMatches.filter((match) => match.inProgress === true);
 
     return res.status(200).json(filteredMatches);
   }
@@ -45,13 +41,8 @@ export default class UserController {
 
   async saveMatchAsInProgress(req: Request, res: Response): Promise<Response> {
     const newMatch = req.body;
-    console.log('newMatch:', newMatch);
-    console.log('new match inside controller:', newMatch);
-
-    // const bothTeams = ['homeTeam', 'awayTeam'];
     const doesHomeTeamExist = await TeamModel.findByPk(newMatch.homeTeam);
     const doesAwayTeamExist = await TeamModel.findByPk(newMatch.awayTeam);
-    // const existingTeam = bothTeams.some((team) => await TeamModel.findByPk(newMatch.team));
 
     if (!doesAwayTeamExist || !doesHomeTeamExist) {
       throw new NotFoundHttpError('There is no team with such id!');
@@ -63,7 +54,6 @@ export default class UserController {
 
     delete newMatch.user;
     const matchToSave = await this.matchService.saveMatchAsInProgress(newMatch);
-    // console.log('match to save:', matchToSave);
     return res.status(201).json(matchToSave);
   }
 

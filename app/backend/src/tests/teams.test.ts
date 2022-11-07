@@ -14,7 +14,7 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe.only('Testing the teams route', () => {
+describe('Testing the teams route', () => {
   afterEach(
     sinon.restore
   );

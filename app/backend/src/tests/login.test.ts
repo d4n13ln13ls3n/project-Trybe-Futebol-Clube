@@ -3,14 +3,7 @@ import * as chai from 'chai';
 // @ts-ignore
 import chaiHttp = require('chai-http');
 import UserModel from '../database/models/Users';
-import { User } from '../interfaces';
-
 import { app } from '../app';
-// import Example from '../database/models/ExampleModel';
-
-import { Response } from 'superagent';
-import Users from '../database/models/Users';
-import LoginService from '../services/login.service';
 import * as bcryptjs from 'bcryptjs';
 
 chai.use(chaiHttp);
