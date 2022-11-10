@@ -9,10 +9,8 @@ export default class UserController {
   }
 
   create(req: Request, res: Response): Response {
-    const error = this.userService.create(req.body);
-    if (error) {
-      return res.status(400).json(error);
-    }
-    return res.sendStatus(201);
+    const user = this.userService.create(req.body);
+
+    return res.status(201).json(user);
   }
 }

@@ -2,13 +2,15 @@ import * as sinon from 'sinon';
 import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import MatchModel from '../database/models/Matches';
-import MatchController from '../controllers/match.controller';
-import { MatchDTO, Match } from '../interfaces';
+import TeamModel from '../database/models/Teams';
+// import MatchController from '../controllers/match.controller';
+// import { MatchDTO, Match } from '../interfaces';
 
 import { app } from '../app';
+import LoginService from '../services/login.service';
 
-import { Response } from 'superagent';
-import MatchService from '../services/match.service';
+// import { Response } from 'superagent';
+// import MatchService from '../services/match.service';
 
 chai.use(chaiHttp);
 
@@ -36,6 +38,31 @@ describe('Testing the matches route', () => {
       "awayTeamGoals": 0,
       "inProgress": true,
     }];
+
+    const mockedMatch =
+      {
+        "id": 1,
+        "homeTeam": 16,
+        "homeTeamGoals": 1,
+        "awayTeam": 8,
+        "awayTeamGoals": 1,
+        "inProgress": true,
+      };
+
+      const mockedHomeTeam = 
+        {
+          "id": 16,
+          "teamName": "São Paulo"
+        };
+
+        const mockedLoginObject = {
+          id: 7,
+          username: 'Luiz',
+          role: 'admin',
+          password: 'dafads342',
+          email: 'luiz@email.com',
+        }
+      
 
   it('Successful get request to /matches returns status code 200 and an array of matches', async () => {
     sinon.stub(MatchModel, 'findAll').resolves(mockedMatches as MatchModel[]);
@@ -82,13 +109,20 @@ describe('Testing the matches route', () => {
     expect(httpResponse.body).to.deep.equal(mockedMatches[0]);
   });
 
-  // it.only('Function "getMatches" does not return the expected result and returns an error message', async () => {
-  //   sinon.stub(MatchModel, 'findAll').resolves(null);
+  it('Successful post request to /matches returns status code 201 and the saved match with inProgress = true', async () => {
+    sinon.stub(MatchModel, 'create').resolves(mockedMatches[1] as MatchModel);
+    sinon.stub(TeamModel, 'findByPk').resolves(mockedHomeTeam as TeamModel);
+    sinon.stub(LoginService, 'validateAccessToken').resolves(mockedLoginObject);
 
-  //   const httpResponse = await chai.request(app).get('/matches/33');
-    
-  //   expect(httpResponse.status).to.equal(500);
-  //   expect(httpResponse.body).to.deep.equal({ message: 'Something went wrong' });
-  // });
+    const httpResponse = await chai.request(app)
+      .post('/matches')
+      .set('Authorization', 'ntoken')
+      .send(mockedMatch);
+
+    console.log('http response:', httpResponse);
+
+    expect(httpResponse.status).to.equal(201);
+    expect(httpResponse.body).to.deep.equal(mockedMatches[1]);
+  });
 
 });

@@ -22,7 +22,8 @@ describe('Testing the users route', () => {
           username: 'any_user',
           role: 'any_role',
           password: 'any_password',
-        })
+        });
+        console.log('http response:', httpResponse);
       expect(httpResponse.status).to.equal(400);
     });
   });
@@ -79,7 +80,8 @@ describe('Testing the users route', () => {
           role: 'any_role',
           username: 'any_username',
           password: 'any_password',
-        })
+        });
+        console.log('http response:', httpResponse);
       expect(httpResponse.status).to.equal(201);
     });
   });

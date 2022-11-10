@@ -1,5 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import { User } from '../interfaces';
+import BadRequest from '../errors/httpErrors/BadRequest';
 
 type RequiredFields = ['email', 'username', 'role', 'password'];
 export default class UserService {
@@ -8,9 +9,11 @@ export default class UserService {
     // eslint-disable-next-line no-restricted-syntax
     for (const field of requiredFields) {
       if (!user[field]) {
-        throw new Error(`${field} is required`);
+        throw new BadRequest(`${field} is required`);
       }
     }
+    // const newUser = UserModel.create(user);
+    // return newUser;
     return user;
   }
 }
