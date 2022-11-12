@@ -13,14 +13,14 @@ O objetivo deste projeto de Back End foi criar um site informativo sobre partida
 
  <details>
  <summary> 🇬🇧 English here</summary>
- ## ✏ Information about the project
- The goal of this back-end project was to an informative website on matches and rankings of soccer.
-  - An API was built (using Test-driven Development - TDD) and integrated - through docker-compose - so it worked consuming data from a MySQL database.
-  - A dockerized back end was built using data modeling through Sequelize, able to be consumed by a Front End already supplied for this project by Trybe.
-  - To add a match, it was necessary to have a token, therefore the user should be logged in to make alterations.
-  - The back end implemented business rules to adequately populate the table available in the Front End, which is displayed to the user accessing the system.
+ ## ✏ Information about the project</br>
+ The goal of this back-end project was to an informative website on matches and rankings of soccer. </br>
+  - An API was built (using Test-driven Development - TDD) and integrated - through docker-compose - so it worked consuming data from a MySQL database.</br>
+  - A dockerized back end was built using data modeling through Sequelize, able to be consumed by a Front End already supplied for this project by Trybe.</br>
+  - To add a match, it was necessary to have a token, therefore the user should be logged in to make alterations.</br>
+  - The back end implemented business rules to adequately populate the table available in the Front End, which is displayed to the user accessing the system.</br>
  </br>
- - The application was developed with <strong>Node.js and Typescript</strong>, using <strong>MSC architecture</strong> (Model, Service and Controller) and <strong>MySQL</strong> to perform CRUD (Create, Read, Update and Delete) operations.
+ - The application was developed with <strong>Node.js and Typescript</strong>, using <strong>MSC architecture</strong> (Model, Service and Controller) and <strong>MySQL</strong> to perform CRUD (Create, Read, Update and Delete) operations.</br>
  - To validate data input, the <strong>Joi</strong> library was used and to generate and authenticate tokens JSON Web Token - <strong>JWT</strong>.
  </details>
  
