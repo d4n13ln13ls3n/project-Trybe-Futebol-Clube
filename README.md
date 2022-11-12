@@ -13,7 +13,7 @@ O objetivo deste projeto de Back End foi criar um site informativo sobre partida
 
  <details>
  <summary> 🇬🇧 English here</summary>
- ## ✏ Information about the project</br>
+ ✏ Information about the project</br>
  The goal of this back-end project was to an informative website on matches and rankings of soccer. </br>
   - An API was built (using Test-driven Development - TDD) and integrated - through docker-compose - so it worked consuming data from a MySQL database.</br>
   - A dockerized back end was built using data modeling through Sequelize, able to be consumed by a Front End already supplied for this project by Trybe.</br>
